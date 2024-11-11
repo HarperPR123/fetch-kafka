@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 # Initialize a Kafka consumer to read messages from the 'user-login' topic
 consumer = KafkaConsumer(
     'user-login',  # Topic to consume messages from
+    group_id='user-login-group',  # Add a consumer group ID
     bootstrap_servers='localhost:29092',  # Kafka broker address
     value_deserializer=lambda x: json.loads(x.decode('utf-8'))  # Deserialize messages from JSON
 )
@@ -18,7 +19,11 @@ consumer = KafkaConsumer(
 # Initialize a Kafka producer to send messages to another topic
 producer = KafkaProducer(
     bootstrap_servers='localhost:29092',  # Kafka broker address
-    value_serializer=lambda v: json.dumps(v).encode('utf-8')  # Serialize messages to JSON
+    value_serializer=lambda v: json.dumps(v).encode('utf-8'),  # Serialize messages to JSON
+    batch_size=32768,  # Increase the batch size 
+    linger_ms=10,      # Introduce a small delay to allow batching
+    acks='all',        # Ensure message delivery reliability
+    compression_type='gzip'  # Use compression to reduce message size and network load
 )
 
 # Dictionaries to count occurrences of device types and locales
