@@ -1,4 +1,4 @@
-Real-Time Data Processing Pipeline using Kafka and Python
+									Real-Time Data Processing Pipeline using Kafka and Python
 
 Project Overview
 This project demonstrates a real-time data processing pipeline using Kafka and Python. The pipeline ingests streaming data from a Kafka topic, processes the data to extract insights, and sends the processed data to another Kafka topic. The setup uses kafka-python to implement the Kafka Consumer and Producer.
