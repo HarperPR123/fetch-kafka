@@ -47,11 +47,13 @@ Real-time processing: Get one message, transform and process then send to a new 
 Controlled Message Handling: The script shows insight per 100 to update the insight about login information by locale and device
 
 **How to Ensure Scalability**
+
 Explicitly Use Consumer Groups: a group_id is assigned to your Kafka consumer. This allows Kafka to distribute messages across multiple consumer instances efficiently to enhance scalability
 Optimized the Producer parameter settings: Setting parameters to help reduce the number of network requests and improve throughput, making the producer more efficient in high-load scenarios.
 Partitioning: My Kafka topics can be partitioned to scale horizontally, distributing the load across multiple consumers for parallel processing.
 
 **How to Ensure Fault Tolerance**
+
 Error Handling with Try-Except Blocks: If an error occurs (e.g., a malformed message or a processing issue), the script logs the error and continues processing the next message, rather than crashing the entire consumer. 
 Graceful Shutdown: The code handles a KeyboardInterrupt (e.g., when you manually stop the script) and ensures the Kafka producer is closed properly.
 
